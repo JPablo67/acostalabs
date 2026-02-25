@@ -117,7 +117,7 @@ export const metadata: Metadata = {
 
   // Verification — TODO: add GSC code when ready
   verification: {
-    google: "", // Add google-site-verification token here
+    google: "bK_lXUncUoPuGxPSGAH-DT2rFq8X-IEQhGD57aB44Hk",
   },
 
   // App / PWA basics
