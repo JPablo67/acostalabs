@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
@@ -8,8 +9,13 @@ import { NAV_LINKS, SITE } from "@/lib/constants";
 import { Button } from "@/components/ui/Button";
 
 export function Header() {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // On non-homepage routes, always use "scrolled" (dark text) style
+  const useDarkStyle = !isHome || isScrolled;
 
   useEffect(() => {
     let ticking = false;
@@ -41,9 +47,9 @@ export function Header() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-            ? "bg-white/90 backdrop-blur-lg shadow-sm border-b border-border"
-            : "bg-transparent"
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${useDarkStyle
+          ? "bg-white/90 backdrop-blur-lg shadow-sm border-b border-border"
+          : "bg-transparent"
           }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -59,7 +65,7 @@ export function Header() {
                 priority
               />
               <span
-                className={`font-bold text-lg tracking-tight transition-colors duration-300 ${isScrolled ? "text-text" : "text-white"
+                className={`font-bold text-lg tracking-tight transition-colors duration-300 ${useDarkStyle ? "text-text" : "text-white"
                   }`}
               >
                 ACOSTA<span className="font-normal">LABS</span>
@@ -72,9 +78,9 @@ export function Header() {
                 <a
                   key={link.href}
                   href={link.href}
-                  className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-300 ${isScrolled
-                      ? "text-text-secondary hover:text-primary hover:bg-primary/5"
-                      : "text-gray-300 hover:text-white hover:bg-white/10"
+                  className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-300 ${useDarkStyle
+                    ? "text-text-secondary hover:text-primary hover:bg-primary/5"
+                    : "text-gray-300 hover:text-white hover:bg-white/10"
                     }`}
                 >
                   {link.label}
@@ -93,9 +99,9 @@ export function Header() {
               {/* Mobile Menu Toggle */}
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className={`lg:hidden p-2 rounded-lg transition-colors ${isScrolled
-                    ? "text-text hover:bg-surface"
-                    : "text-white hover:bg-white/10"
+                className={`lg:hidden p-2 rounded-lg transition-colors ${useDarkStyle
+                  ? "text-text hover:bg-surface"
+                  : "text-white hover:bg-white/10"
                   }`}
                 aria-label="Toggle menu"
               >
