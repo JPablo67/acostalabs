@@ -60,15 +60,21 @@ const components = {
             {...props}
         />
     ),
-    code: (props: React.HTMLAttributes<HTMLElement>) => (
-        <code
-            className="bg-surface px-1.5 py-0.5 rounded text-sm font-mono text-primary border border-border"
-            {...props}
-        />
-    ),
+    code: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => {
+        // Block code (inside <pre>) has className like "language-xxx" or "hljs"
+        if (className) {
+            return <code className={className} {...props} />;
+        }
+        return (
+            <code
+                className="bg-surface px-1.5 py-0.5 rounded text-sm font-mono text-primary border border-border"
+                {...props}
+            />
+        );
+    },
     pre: (props: React.HTMLAttributes<HTMLPreElement>) => (
         <pre
-            className="bg-[#0d1117] text-[#e6edf3] rounded-xl p-5 overflow-x-auto mb-6 text-sm leading-relaxed border border-border/50"
+            className="bg-[#0d1117] text-[#e6edf3] rounded-xl p-5 overflow-x-auto mb-6 text-sm border border-border/50 font-mono whitespace-pre leading-snug"
             {...props}
         />
     ),

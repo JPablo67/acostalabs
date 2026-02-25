@@ -38,32 +38,35 @@ If your pipeline doesn't fail bad AI output, your workflow is broken.
 
 ## Architecture: How the Pieces Actually Work Together
 
+Text-based workflow diagram (this is what runs in my head every day):
 
-### Workflow Diagram
-
-```mermaid
-graph TD
-      PR[Product Requirements]
-      D(Claude: design)
-      ADR[ADR + API Contracts + DB Schema]
-      RAG[RAG Index Updated]
-      IMPL[Implementation]
-      COP(Copilot)
-      TESTS(Tests)
-      CI(CI/CD: lint, tests, security)
-      REV(Claude: review)
-      PROD(Production)
-
-      PR --> D
-      D --> ADR
-      ADR --> RAG
-      RAG --> IMPL
-      IMPL --> COP
-      IMPL --> TESTS
-      COP --> CI
-      TESTS --> CI
-      CI --> REV
-      REV --> PROD
+```
+[Product Requirements]
+          |
+          v
+     (Claude: design)
+          |
+          v
+[ADR + API Contracts + DB Schema]
+          |
+          v
+   (RAG Index Updated)
+          |
+          v
+[Implementation]
+   |           |
+(Copilot)   (Tests)
+   |           |
+   +-----+-----+
+         |
+         v
+    (CI/CD: lint, tests, security)
+         |
+         v
+     (Claude: review)
+         |
+         v
+      Production
 ```
 
 **Key insight:**
@@ -208,12 +211,12 @@ results = ask_project_memory("How does token refresh work?")
 
 ## Tradeoffs (No Silver Bullets)
 
-| Pros                                   | Cons                                 |
-|----------------------------------------|--------------------------------------|
-| Faster iteration with fewer blind spots | You will over-trust AI early on      |
-| Better architectural conversations     | Prompting is a skill (you'll suck at first) |
-| Less repeated context switching        | RAG infra has real maintenance cost  |
-| Institutional knowledge doesn't rot    | Junior engineers can cargo-cult AI output |
+| Pros | Cons |
+|------|------|
+| Faster iteration with fewer blind spots | You will over-trust AI early on |
+| Better architectural conversations | Prompting is a skill (you'll suck at first) |
+| Less repeated context switching | RAG infra has real maintenance cost |
+| Institutional knowledge doesn't rot | Junior engineers can cargo-cult AI output |
 
 **If you're not willing to review aggressively, don't use this workflow.**
 
