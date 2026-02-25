@@ -144,8 +144,18 @@ export default function RootLayout({
         <meta name="geo.position" content="4.5339;-75.6811" />
         <meta name="ICBM" content="4.5339, -75.6811" />
 
-        {/* TODO: Google Analytics — add GA4 snippet here when ready */}
-        {/* TODO: Google Search Console — add verification meta here when ready */}
+        {/* Google Analytics 4 */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-LFZZSJ4N4Y" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-LFZZSJ4N4Y');
+            `,
+          }}
+        />
       </head>
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}
