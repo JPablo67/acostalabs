@@ -41,16 +41,15 @@ export function Header() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
             ? "bg-white/90 backdrop-blur-lg shadow-sm border-b border-border"
             : "bg-transparent"
-        }`}
+          }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 lg:h-20">
             {/* Logo */}
-            <a href="#" className="flex items-center gap-2 group">
+            <a href="/" className="flex items-center gap-2 group">
               <Image
                 src="/logo-icon.png"
                 alt="AcostaLabs"
@@ -60,9 +59,8 @@ export function Header() {
                 priority
               />
               <span
-                className={`font-bold text-lg tracking-tight transition-colors duration-300 ${
-                  isScrolled ? "text-text" : "text-white"
-                }`}
+                className={`font-bold text-lg tracking-tight transition-colors duration-300 ${isScrolled ? "text-text" : "text-white"
+                  }`}
               >
                 ACOSTA<span className="font-normal">LABS</span>
               </span>
@@ -74,11 +72,10 @@ export function Header() {
                 <a
                   key={link.href}
                   href={link.href}
-                  className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-300 ${
-                    isScrolled
+                  className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-300 ${isScrolled
                       ? "text-text-secondary hover:text-primary hover:bg-primary/5"
                       : "text-gray-300 hover:text-white hover:bg-white/10"
-                  }`}
+                    }`}
                 >
                   {link.label}
                 </a>
@@ -88,7 +85,7 @@ export function Header() {
             {/* CTA + Mobile Menu Button */}
             <div className="flex items-center gap-3">
               <div className="hidden lg:block">
-                <Button href="#contact" size="sm">
+                <Button href="/#contact" size="sm">
                   Hire Me
                 </Button>
               </div>
@@ -96,11 +93,10 @@ export function Header() {
               {/* Mobile Menu Toggle */}
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className={`lg:hidden p-2 rounded-lg transition-colors ${
-                  isScrolled
+                className={`lg:hidden p-2 rounded-lg transition-colors ${isScrolled
                     ? "text-text hover:bg-surface"
                     : "text-white hover:bg-white/10"
-                }`}
+                  }`}
                 aria-label="Toggle menu"
               >
                 {isMobileMenuOpen ? (
@@ -167,7 +163,7 @@ export function Header() {
                 {/* Mobile CTA */}
                 <div className="p-6 border-t border-border">
                   <Button
-                    href="#contact"
+                    href="/#contact"
                     className="w-full"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
