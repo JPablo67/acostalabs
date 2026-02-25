@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Required for Docker deployment — outputs standalone server.js
+  output: "standalone",
   // Image optimization
   images: {
     formats: ["image/avif", "image/webp"],
