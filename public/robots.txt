@@ -1,0 +1,14 @@
+# *
+User-agent: *
+Allow: /
+
+# *
+User-agent: *
+Disallow: /api/
+Disallow: /_next/
+
+# Host
+Host: https://acostalabs.com
+
+# Sitemaps
+Sitemap: https://acostalabs.com/sitemap.xml

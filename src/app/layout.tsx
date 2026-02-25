@@ -18,46 +18,112 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://acostalabs.com"),
+
   title: {
     default: "Juan Pablo Acosta | Full-Stack Software Engineer — Acosta Labs",
     template: "%s | Acosta Labs",
   },
+
   description:
-    "Full-Stack Engineer with 4+ years building scalable platforms. Drove 300%+ sales growth, 5x user scaling & 99.9% uptime. Expert in React, Java, AI integration. Available for hire.",
+    "Full-Stack Software Engineer with 4+ years building scalable platforms. Drove 300%+ sales growth, 5x user scaling & 99.9% uptime. Expert in React, Java, AI integration. Available for hire.",
+
   keywords: [
-    "full stack developer",
-    "software engineer",
-    "freelance developer",
-    "react developer",
-    "java developer",
-    "AI integration",
+    // Role-based (recruiter searches)
+    "full stack software engineer",
+    "full stack developer for hire",
+    "freelance software engineer",
+    "React developer",
+    "Java developer",
+    "Next.js developer",
+    "TypeScript developer",
+    // Specialization
+    "AI integration developer",
     "e-commerce developer",
-    "web development",
-    "hire developer",
+    "Shopify developer",
+    "cloud native developer",
+    "DevOps engineer",
+    // Location
+    "software engineer Colombia",
+    "remote software engineer",
+    "bilingual software engineer",
+    // Portfolio
+    "software engineer portfolio",
+    "full stack portfolio 2025",
+    "hire software engineer",
+    // Tech stack
+    "React Java developer",
+    "Spring Boot developer",
+    "Node.js developer",
+    "Python developer",
+    "AWS developer",
+    "Docker Kubernetes",
   ],
-  authors: [{ name: "Juan Pablo Acosta" }],
+
+  authors: [{ name: "Juan Pablo Acosta", url: "https://acostalabs.com" }],
   creator: "Juan Pablo Acosta",
+  publisher: "Acosta Labs",
+
+  // Canonical URL
+  alternates: {
+    canonical: "https://acostalabs.com",
+  },
+
+  // Open Graph
   openGraph: {
-    type: "website",
+    type: "profile",
     locale: "en_US",
     url: "https://acostalabs.com",
     siteName: "Acosta Labs",
     title: "Juan Pablo Acosta | Full-Stack Software Engineer",
     description:
       "Full-Stack Engineer with 4+ years building scalable platforms. Drove 300%+ sales growth, 5x user scaling & 99.9% uptime. Expert in React, Java, AI integration.",
-    images: [{ url: "/logo-full.png", width: 1200, height: 630 }],
+    images: [
+      {
+        url: "/logo-full.png",
+        width: 1200,
+        height: 630,
+        alt: "Juan Pablo Acosta — Full-Stack Software Engineer | Acosta Labs",
+      },
+    ],
+    // Profile-specific OG tags
+    firstName: "Juan Pablo",
+    lastName: "Acosta",
+    username: "JPablo67",
+    gender: "male",
   },
+
+  // Twitter / X
   twitter: {
     card: "summary_large_image",
     title: "Juan Pablo Acosta | Full-Stack Software Engineer",
     description:
       "Full-Stack Engineer with 4+ years building scalable platforms. 300%+ sales growth · 5x user scaling · 99.9% uptime · 95+ Lighthouse.",
+    images: ["/logo-full.png"],
+    creator: "@acostalabs",
   },
+
+  // Robots
   robots: {
     index: true,
     follow: true,
-    googleBot: { index: true, follow: true },
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
+
+  // Verification — TODO: add GSC code when ready
+  verification: {
+    google: "", // Add google-site-verification token here
+  },
+
+  // App / PWA basics
+  applicationName: "Acosta Labs",
+  referrer: "origin-when-cross-origin",
+  category: "technology",
 };
 
 export default function RootLayout({
@@ -67,6 +133,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
+      <head>
+        {/* Preconnect to Google Fonts for faster font load */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+
+        {/* Geo meta tags — local SEO */}
+        <meta name="geo.region" content="CO-QUI" />
+        <meta name="geo.placename" content="Armenia, Quindío, Colombia" />
+        <meta name="geo.position" content="4.5339;-75.6811" />
+        <meta name="ICBM" content="4.5339, -75.6811" />
+
+        {/* TODO: Google Analytics — add GA4 snippet here when ready */}
+        {/* TODO: Google Search Console — add verification meta here when ready */}
+      </head>
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}
       >
