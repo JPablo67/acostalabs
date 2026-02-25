@@ -19,6 +19,5 @@ module.exports = {
       // Block Next.js internal routes
       { userAgent: "*", disallow: ["/api/", "/_next/"] },
     ],
-    additionalSitemaps: ["https://acostalabs.com/sitemap.xml"],
   },
 };
