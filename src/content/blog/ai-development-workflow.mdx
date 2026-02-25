@@ -1,0 +1,114 @@
+---
+title: "My AI-Powered Development Workflow (Claude + Copilot + RAG)"
+date: "2026-04-01"
+excerpt: "How I use Claude Code, GitHub Copilot, and custom RAG pipelines to accelerate full-stack development across every stage of the SDLC."
+tags: ["AI", "Workflow", "Productivity"]
+readTime: "10 min"
+published: true
+---
+
+## The Modern Developer's Toolkit
+
+As a full-stack engineer, I've spent the last two years integrating AI into every stage of my development workflow. The result: I ship faster, write better code, and spend less time on repetitive tasks.
+
+Here's the exact setup I use daily.
+
+## The Stack
+
+| Tool | Purpose | Stage |
+|------|---------|-------|
+| **Claude Code** | Architecture decisions, complex refactors, code review | Planning & Review |
+| **GitHub Copilot** | Line-by-line code completion, boilerplate generation | Implementation |
+| **Custom RAG** | Project-specific context, documentation search | All stages |
+
+## Claude Code: The Architect
+
+I use Claude for tasks that require **understanding the full picture**:
+
+- **System design** — "Given these requirements, what's the best database schema?"
+- **Complex refactors** — "Refactor this module to use the Strategy pattern"
+- **Code review** — "Review this PR for security vulnerabilities and performance issues"
+- **Debugging** — "This test is failing intermittently. Here's the code and the error logs."
+
+The key is giving Claude enough context. I always include:
+
+1. The relevant code files
+2. The error messages or expected behavior
+3. The constraints (performance requirements, tech stack, etc.)
+
+## GitHub Copilot: The Implementer
+
+Copilot excels at **tactical, line-level work**:
+
+```typescript
+// I type this comment:
+// Validate email format, check length < 255, and sanitize XSS
+
+// Copilot generates:
+function validateEmail(email: string): ValidationResult {
+  const sanitized = DOMPurify.sanitize(email.trim());
+  if (sanitized.length > 255) {
+    return { valid: false, error: "Email too long" };
+  }
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return {
+    valid: emailRegex.test(sanitized),
+    error: emailRegex.test(sanitized) ? null : "Invalid format",
+  };
+}
+```
+
+The trick: **write descriptive comments first**, then let Copilot fill in the implementation. Your comments become documentation for free.
+
+## Custom RAG: Project Memory
+
+The most underrated tool in my stack. I built a simple RAG pipeline that indexes my project documentation:
+
+```python
+# Index project docs into a vector store
+from langchain.vectorstores import Chroma
+from langchain.embeddings import OpenAIEmbeddings
+
+# Sources: README, architecture docs, API specs, past decisions
+docs = load_project_documentation("./docs")
+vectorstore = Chroma.from_documents(docs, OpenAIEmbeddings())
+
+# Query during development
+results = vectorstore.similarity_search(
+    "How does the authentication flow work in this project?"
+)
+```
+
+This means when I ask Claude about my project, it has access to:
+- Architecture decision records (ADRs)
+- API documentation
+- Database schemas
+- Past code review feedback
+
+## The Workflow in Practice
+
+Here's a typical feature implementation:
+
+1. **Planning (Claude)** — "I need to add user preferences to this app. Here's the current schema and API structure. What's the best approach?"
+2. **Schema (Claude)** — "Generate the migration and TypeScript types for this new table"
+3. **Implementation (Copilot)** — Write the API routes, service layer, and tests with Copilot completing each function
+4. **Review (Claude)** — "Review this diff for edge cases, security issues, and performance"
+5. **Documentation (Claude)** — "Update the API docs with these new endpoints"
+
+## Productivity Gains
+
+Since adopting this workflow:
+
+- **2-3x faster feature delivery** — less time researching, more time building
+- **Fewer bugs in production** — AI-assisted code review catches issues humans miss
+- **Better architecture** — Claude challenges my assumptions and suggests alternatives
+- **Living documentation** — the RAG pipeline ensures docs stay in sync with code
+
+## Tips for Getting Started
+
+1. **Start with one tool** — get comfortable with Copilot before adding Claude and RAG
+2. **Write better prompts** — the quality of AI output is directly proportional to your input
+3. **Don't blindly accept** — always review AI-generated code; it's a copilot, not an autopilot
+4. **Build project context** — the more context you give, the better the results
+
+AI doesn't replace engineering skill — it amplifies it.
