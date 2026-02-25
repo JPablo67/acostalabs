@@ -6,7 +6,7 @@ import { GlobeScene } from "@/components/globe/GlobeScene";
 
 export function Hero() {
   return (
-    <section className="relative min-h-[100dvh] bg-dark overflow-clip">
+    <section className="relative h-screen bg-dark overflow-hidden">
       {/* Background gradient — using will-change for GPU compositing */}
       <div className="absolute inset-0 will-change-transform">
         <div className="absolute inset-0 bg-gradient-to-b from-dark via-dark-surface/50 to-dark" />
@@ -21,7 +21,7 @@ export function Hero() {
         </div>
       </div>
 
-      <div className="pointer-events-none relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 lg:min-h-[100dvh] flex items-start pt-16 sm:pt-28 lg:items-center lg:pt-0">
+      <div className="pointer-events-none relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-start pt-16 sm:pt-28 lg:items-center lg:pt-0">
         <div className="w-full">
           {/* Text Content — sits above globe */}
           <div
