@@ -10,6 +10,7 @@ published: true
 ## Why Most "AI Dev Workflows" Fail in Production
 
 Founders and engineers don't fail at shipping because they lack ideas. They fail because execution collapses under:
+
 - unclear architecture,
 - inconsistent code quality,
 - stale documentation,
@@ -25,20 +26,21 @@ The workflow below is how I use Claude, GitHub Copilot, and a custom RAG pipelin
 
 | Tool | Role | Where It Fits |
 |------|------|---------------|
-| Claude | Architecture, refactors, reviews, threat modeling | Planning, Review |
-| GitHub Copilot | Line-level implementation, tests, boilerplate | Coding |
-| Custom RAG | Project memory (ADRs, schemas, API contracts) | All stages |
-| CI/CD | Guardrails (lint, tests, migrations, security) | Delivery |
+| **Claude** | Architecture, refactors, reviews, threat modeling | Planning, Review |
+| **GitHub Copilot** | Line-level implementation, tests, boilerplate | Coding |
+| **Custom RAG** | Project memory (ADRs, schemas, API contracts) | All stages |
+| **CI/CD** | Guardrails (lint, tests, migrations, security) | Delivery |
 
-Rule: LLMs propose, CI enforces.
+**Rule: LLMs propose, CI enforces.**
 If your pipeline doesn't fail bad AI output, your workflow is broken.
 
 ---
 
 ## Architecture: How the Pieces Actually Work Together
 
-Text-based workflow diagram:
+Text-based workflow diagram (this is what runs in my head every day):
 
+```
 [Product Requirements]
           |
           v
@@ -65,9 +67,10 @@ Text-based workflow diagram:
          |
          v
       Production
+```
 
-Key insight:
-RAG is the memory layer that keeps AI honest. Without it, every design conversation starts from amnesia.
+**Key insight:**
+RAG is the memory layer that keeps Claude honest. Without it, every design conversation starts from amnesia.
 
 ---
 
@@ -80,23 +83,30 @@ I use Claude when the problem space is messy:
 - Reviewing PRs for security and performance risks
 - Threat modeling auth flows
 
-Example prompt:
+**Example prompt I actually use:**
 
-"Here's the current auth flow, schema, and traffic profile.
-I need to add user preferences without breaking backwards compatibility.
-Propose a migration plan, API changes, and rollout strategy.
-Constraints: zero downtime, Postgres, 50M rows."
+> "Here's the current auth flow, schema, and traffic profile.
+> I need to add user preferences without breaking backwards compatibility.
+> Propose a migration plan, API changes, and rollout strategy.
+> Constraints: zero downtime, Postgres, 50M rows."
 
-What I expect back:
-- Tradeoffs
+**What I expect back:**
+
+- Tradeoffs (not just one solution)
 - Failure modes
-- Operational risks
+- Operational risks (locks, backfills, rollbacks)
+
+If the model can't articulate tradeoffs, I discard the design.
 
 ---
 
 ## GitHub Copilot: Fast Hands, No Brain
 
-```ts
+Copilot shines at local context. I don't ask it to think. I ask it to type.
+
+```typescript
+// Validate email, enforce length < 255, normalize casing, prevent XSS
+
 import DOMPurify from "dompurify";
 
 type ValidationResult = { valid: boolean; error?: string };
@@ -122,9 +132,25 @@ export function validateEmail(email: string): ValidationResult {
 }
 ```
 
+**Rules I follow:**
+
+- Comments define intent.
+- I refactor AI output aggressively.
+- If Copilot introduces logic I didn't ask for, I delete it.
+
+**Copilot is speed. You are the taste filter.**
+
 ---
 
-## Custom RAG: Project Memory
+## Custom RAG: Stop Re-Explaining Your System to AI
+
+Without RAG, every AI session is a first date. With RAG, it's a long-term relationship with memory.
+
+**Production-grade RAG setup:**
+
+- **Index:** ADRs, schema diagrams, OpenAPI specs, migration notes, incident postmortems
+- **Chunking** by semantic sections (not arbitrary token sizes)
+- **Re-index on CI** when docs change
 
 ```python
 from langchain.vectorstores import Chroma
@@ -135,42 +161,97 @@ vectorstore = Chroma.from_documents(docs, OpenAIEmbeddings())
 
 def ask_project_memory(question: str):
     return vectorstore.similarity_search(question, k=5)
+
+results = ask_project_memory("How does token refresh work?")
 ```
 
----
+**This is what makes Claude useful at scale:**
 
-## Workflow in Practice
+- "Don't break the auth refresh token semantics."
+- "This endpoint is deprecated."
+- "We rejected this design in ADR-004 for a reason."
 
-1. Design (Claude + RAG)
-2. Schema + migrations
-3. Implementation (Copilot)
-4. Review
-5. CI/CD enforcement
-6. Docs + RAG update
+**RAG is how you encode institutional memory so AI doesn't repeat past mistakes.**
 
 ---
 
-## Tradeoffs
+## Workflow in Practice: Shipping a Real Feature
 
-Pros:
-- Faster iteration
-- Better architecture
+**Example:** adding "team-level feature flags" to a SaaS app.
 
-Cons:
-- Over-trust risk
-- RAG maintenance cost
+1. **Design (Claude + RAG)**
+   - Schema changes
+   - API contract
+   - Migration strategy
+   - Rollout plan
+
+2. **Schema + Migrations (Claude)**
+   - Generates migration skeletons
+   - I rewrite indexes and constraints manually
+
+3. **Implementation (Copilot)**
+   - Controllers, services, tests
+   - Boilerplate is free; logic is mine
+
+4. **Review (Claude)**
+   - "What breaks at 10x traffic?"
+   - "Where can this be abused?"
+
+5. **CI/CD Enforcement**
+   - Migrations run on staging
+   - Load tests on feature flag evaluation
+
+6. **Docs + RAG Update**
+   - ADR recorded
+   - RAG re-indexed
+
+**This closes the loop between design → code → memory.**
 
 ---
 
-## Practical Tips
+## Tradeoffs (No Silver Bullets)
 
-- Gate AI output with CI
-- Record ADRs
-- Separate design and implementation
-- Measure outcomes
+| Pros | Cons |
+|------|------|
+| Faster iteration with fewer blind spots | You will over-trust AI early on |
+| Better architectural conversations | Prompting is a skill (you'll suck at first) |
+| Less repeated context switching | RAG infra has real maintenance cost |
+| Institutional knowledge doesn't rot | Junior engineers can cargo-cult AI output |
+
+**If you're not willing to review aggressively, don't use this workflow.**
 
 ---
 
-## Closing
+## Mistakes I See Teams Make
+
+- Letting AI define architecture **without constraints**
+- Shipping AI-generated code **without tests**
+- No CI guardrails → hallucinations reach prod
+- Treating RAG as "search" instead of **"system memory"**
+- Not recording decisions (no ADRs = no learning loop)
+
+---
+
+## Practical Tips for Founders and Engineering Leads
+
+- **Gate AI output with CI:** migrations, tests, lint, security scans
+- **Record decisions:** feed ADRs into RAG or you'll repeat mistakes
+- **Separate roles:** design with Claude, type with Copilot
+- **Measure outcomes:** cycle time, regression rate, incident count
+- **Budget for infra:** RAG is an engineering system, not a toy
+
+---
+
+## Closing: Why This Matters for Real Businesses
+
+AI doesn't replace senior engineers. It compresses the feedback loop between thinking and shipping.
+
+My value to teams isn't "I use AI."
+It's that I design systems where:
+
+- architecture decisions are **deliberate**,
+- AI output is **constrained by reality**,
+- documentation **stays alive**,
+- and features move from idea → production **without chaos**.
 
 End-to-end delivery plus pragmatic AI adoption is how you ship faster without breaking your product or your team.
