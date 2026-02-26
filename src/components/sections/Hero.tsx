@@ -22,7 +22,7 @@ export function Hero() {
       </div>
 
       {/* Stable mobile layout: Fixed top padding prevents jumping when mobile browser UI collapses. */}
-      <div className="pointer-events-none relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-[100svh] lg:min-h-[100dvh] flex flex-col pt-20 pb-28 justify-top lg:flex-row lg:items-center lg:pt-0 lg:pb-0">
+      <div className="pointer-events-none relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-[100svh] lg:min-h-[100dvh] flex flex-col pt-16 pb-28 justify-top lg:flex-row lg:items-center lg:pt-0 lg:pb-0">
         <div className="w-full">
           {/* Text Content — sits above globe */}
           <div
