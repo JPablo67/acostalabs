@@ -21,8 +21,9 @@ export function Hero() {
         </div>
       </div>
 
-      <div className="pointer-events-none relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 lg:min-h-[100dvh] flex items-start pt-16 pb-40 sm:pt-28 sm:pb-48 lg:items-center lg:pt-0 lg:pb-0">
-        <div className="w-full">
+      {/* Wrapper now uses min-h-dvh and vertical centering to automatically fit varying screen heights natively without overflowing padding */}
+      <div className="pointer-events-none relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-[100dvh] flex flex-col justify-center pb-24 lg:flex-row lg:items-center lg:pb-0">
+        <div className="w-full mt-10 md:mt-0">
           {/* Text Content — sits above globe */}
           <div
             className="pointer-events-auto text-center lg:text-left relative z-20 lg:max-w-[50%]"
@@ -53,7 +54,7 @@ export function Hero() {
             </p>
 
             {/* CTAs */}
-            <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+            <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
               <Button href="#contact" size="lg">
                 <Send className="w-5 h-5" />
                 Let&apos;s Talk
@@ -65,17 +66,17 @@ export function Hero() {
             </div>
 
             {/* Quick stats */}
-            <div className="mt-12 grid grid-cols-3 gap-6 max-w-md mx-auto lg:mx-0">
+            <div className="mt-10 md:mt-12 grid grid-cols-3 gap-4 md:gap-6 max-w-md mx-auto md:mx-0">
               {[
                 { value: "300%+", label: "Sales Growth" },
                 { value: "99.9%", label: "Uptime" },
                 { value: "Top 1%", label: "Nationally" },
               ].map((stat) => (
-                <div key={stat.label} className="text-center lg:text-left">
-                  <div className="text-2xl sm:text-3xl font-bold text-white">
+                <div key={stat.label} className="text-center md:text-left">
+                  <div className="text-xl sm:text-2xl md:text-3xl font-bold text-white">
                     {stat.value}
                   </div>
-                  <div className="text-xs sm:text-sm text-gray-300 mt-1">
+                  <div className="text-[10px] sm:text-xs md:text-sm text-gray-300 mt-1 uppercase tracking-wide">
                     {stat.label}
                   </div>
                 </div>
