@@ -22,7 +22,7 @@ export function Hero() {
       </div>
 
       {/* Stable mobile layout: Fixed top padding prevents jumping when mobile browser UI collapses. */}
-      <div className="pointer-events-none relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-[100svh] flex flex-col pt-24 pb-20 justify-start lg:justify-center lg:flex-row lg:items-center lg:pt-0 lg:pb-0">
+      <div className="pointer-events-none relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-[100svh] flex flex-col pt-24 pb-32 justify-start lg:justify-center lg:flex-row lg:items-center lg:pt-0 lg:pb-0">
         <div className="w-full">
           {/* Text Content — sits above globe */}
           <div
@@ -86,9 +86,9 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Scroll indicator (hidden on small screens to save space and prevent overlap) */}
+      {/* Scroll indicator */}
       <div
-        className="hidden md:flex pointer-events-auto absolute bottom-6 left-1/2 -translate-x-1/2 flex-col items-center gap-3 z-20 animate-fade-in"
+        className="pointer-events-auto absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-20 animate-fade-in"
         style={{ animationDelay: "1.5s", animationFillMode: "both" }}
       >
         <span
