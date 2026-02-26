@@ -26,7 +26,7 @@ const jsonLd = {
         width: 256,
         height: 256,
       },
-      email: "acostapablose@gmail.com",
+      email: "jp@acostalabs.com",
       telephone: "+573117700750",
       address: {
         "@type": "PostalAddress",
@@ -101,7 +101,7 @@ const jsonLd = {
       availableLanguage: ["English", "Spanish"],
       contactPoint: {
         "@type": "ContactPoint",
-        email: "acostapablose@gmail.com",
+        email: "jp@acostalabs.com",
         contactType: "customer support",
         availableLanguage: ["English", "Spanish"],
       },

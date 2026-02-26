@@ -5,7 +5,7 @@ export const SITE = {
   url: "https://acostalabs.com",
   author: "Juan Pablo Acosta",
   title: "Full-Stack Software Engineer",
-  email: "acostapablose@gmail.com",
+  email: "jp@acostalabs.com",
   phone: "+57 3117700750",
   location: "Armenia, Quindío, Colombia",
   linkedin: "https://www.linkedin.com/in/juan-pablo-acosta-91a521195/",
