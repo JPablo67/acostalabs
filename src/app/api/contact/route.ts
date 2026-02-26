@@ -37,8 +37,8 @@ export async function POST(req: NextRequest) {
             // Don't await these so the user's request returns faster
             // Email 1: Notification to Admin
             resend.emails.send({
-                from: "AcostaLabs <contact@acostalabs.com>",
-                to: "contact@acostalabs.com", // This forwards to your personal email via Cloudflare
+                from: "AcostaLabs <jp@acostalabs.com>",
+                to: "jp@acostalabs.com", // This forwards to your personal email via Cloudflare
                 replyTo: email, // If you hit reply, it goes to the user
                 subject: `New Lead: ${subject} from ${name}`,
                 react: ContactNotification({ name, email, subject, budget, message }),
@@ -46,7 +46,7 @@ export async function POST(req: NextRequest) {
 
             // Email 2: Auto-reply to the User
             resend.emails.send({
-                from: "Juan Pablo Acosta <contact@acostalabs.com>",
+                from: "Juan Pablo Acosta <jp@acostalabs.com>",
                 to: email, // The user's email
                 subject: "Message Received — AcostaLabs",
                 react: AutoReply({ name }),
