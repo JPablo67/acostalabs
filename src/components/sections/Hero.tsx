@@ -39,7 +39,7 @@ export function Hero() {
               to the future
             </h1>
 
-            {/* 👇 Micro-screen safe paragraph (no 5-line wrap under 337px) */}
+            {/* Paragraph unchanged */}
             <p
               className="
                 mt-3
@@ -82,8 +82,17 @@ export function Hero() {
               </Button>
             </div>
 
-            {/* Quick stats */}
-            <div className="mt-8 sm:mt-12 grid grid-cols-3 gap-2 sm:gap-4 md:gap-6 max-w-md mx-auto md:mx-0">
+            {/* 👇 Updated Quick stats spacing for ≤415px */}
+            <div
+              className="
+                mt-4
+                [@media(min-width:416px)]:mt-8
+                sm:mt-12
+                grid grid-cols-3
+                gap-2 sm:gap-4 md:gap-6
+                max-w-md mx-auto md:mx-0
+              "
+            >
               {[
                 { value: "300%+", label: "Sales Growth" },
                 { value: "99.9%", label: "Uptime" },
