@@ -27,6 +27,9 @@ COPY --from=builder /app/.next/static ./.next/static
 # Create cache directory with correct ownership
 RUN mkdir -p .next/cache && chown -R nextjs:nodejs .next/cache
 
+# Create sqlite data directory
+RUN mkdir -p /app/data && chown -R nextjs:nodejs /app/data
+
 USER nextjs
 EXPOSE 3001
 

@@ -29,6 +29,7 @@ interface ContactFormData {
 export function Contact() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const {
     register,
@@ -39,17 +40,32 @@ export function Contact() {
 
   const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true);
-    // TODO: Connect to Resend API
-    console.log("Form data:", data);
+    setSubmitError(null);
 
-    // Simulate submission
-    await new Promise((r) => setTimeout(r, 1000));
-    setIsSubmitted(true);
-    setIsSubmitting(false);
-    reset();
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
 
-    // Reset success message after 5 seconds
-    setTimeout(() => setIsSubmitted(false), 5000);
+      if (!response.ok) {
+        throw new Error("Failed to send message. Please try again.");
+      }
+
+      setIsSubmitted(true);
+      reset();
+
+      // Reset success message after 5 seconds
+      setTimeout(() => setIsSubmitted(false), 5000);
+    } catch (err: any) {
+      console.error(err);
+      setSubmitError(err.message || "An error occurred");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
