@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -145,14 +146,21 @@ export default function RootLayout({
         <meta name="ICBM" content="4.5339, -75.6811" />
 
         {/* Google Analytics 4 */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-LFZZSJ4N4Y" />
-        <script
+        <Script
+          strategy="afterInteractive"
+          src={`https://www.googletagmanager.com/gtag/js?id=G-LFZZSJ4N4Y`}
+        />
+        <Script
+          id="gtag-init"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', 'G-LFZZSJ4N4Y');
+              gtag('config', 'G-LFZZSJ4N4Y', {
+                page_path: window.location.pathname,
+              });
             `,
           }}
         />
