@@ -3,6 +3,7 @@ import { Resend } from "resend";
 import pool from "@/lib/db";
 import ContactNotification from "@/components/emails/ContactNotification";
 import AutoReply from "@/components/emails/AutoReply";
+import { checkRateLimit } from "@/lib/rate-limit";
 
 // Initialize Resend
 // In a real app, RESEND_API_KEY should be set in .env.local
@@ -23,6 +24,15 @@ export async function POST(req: NextRequest) {
 
         // Capture IP for basic tracking/rate-limiting
         const ip = req.headers.get("x-forwarded-for") || "unknown";
+
+        // Check Rate Limit (Max 3 per hour per IP)
+        const { success } = checkRateLimit(ip);
+        if (!success) {
+            return NextResponse.json(
+                { error: "Too many requests. Please wait an hour before sending another message." },
+                { status: 429 }
+            );
+        }
 
         // 2. Save to PostgreSQL
         await pool.query(
