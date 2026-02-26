@@ -23,5 +23,22 @@ services:
           memory: 512M
           cpus: "1.0"
 
+  db-ui:
+    image: coleifer/sqlite-web
+    container_name: acostalabs-db-ui
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    volumes:
+      - sqlite_data:/data
+    environment:
+      - SQLITE_WEB_PASSWORD=${DB_UI_PASSWORD:-acostalabs_admin}
+    command: /data/contacts.db
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+          cpus: "0.5"
+
 volumes:
   sqlite_data:
