@@ -22,7 +22,7 @@ export function Hero() {
       </div>
 
       {/* Wrapper now uses min-h-dvh and vertical centering to automatically fit varying screen heights natively without overflowing padding */}
-      <div className="pointer-events-none relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-[100dvh] flex flex-col justify-center pt-20 lg:flex-row lg:items-center lg:pt-0 lg:pb-0 ">
+      <div className="pointer-events-none relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-[100dvh] flex flex-col justify-center pt-10 lg:flex-row lg:items-center lg:pt-0 lg:pb-0 ">
         <div className="w-full mt-10 md:mt-0">
           {/* Text Content — sits above globe */}
           <div
