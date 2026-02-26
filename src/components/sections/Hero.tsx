@@ -25,13 +25,9 @@ export function Hero() {
       <div className="pointer-events-none relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-[100svh] lg:min-h-[100dvh] flex flex-col pt-17 pb-28 justify-top lg:flex-row lg:items-center lg:pt-0 lg:pb-0">
         <div className="w-full">
           {/* Text Content — sits above globe */}
-          <div
-            className="pointer-events-auto text-center lg:text-left relative z-20 lg:max-w-[50%]"
-          >
+          <div className="pointer-events-auto text-center lg:text-left relative z-20 lg:max-w-[50%]">
             {/* Tag line */}
-            <div
-              className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-white/10 border border-white/20 mb-4 sm:mb-6 backdrop-blur-sm"
-            >
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-white/10 border border-white/20 mb-4 sm:mb-6 backdrop-blur-sm">
               <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
               <span className="text-sm font-semibold text-white tracking-wide">
                 Let&apos;s build your next big thing
@@ -39,18 +35,32 @@ export function Hero() {
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-[1.1] tracking-tight [text-shadow:_0_2px_20px_rgba(0,0,0,0.7),_0_0_40px_rgba(0,0,0,0.4)]">
-              Connecting{" "}
-              <span className="gradient-text">businesses</span>
+              Connecting <span className="gradient-text">businesses</span>
               <br />
               to the future
             </h1>
 
-            <p className="mt-5 sm:mt-6 text-base sm:text-lg md:text-xl text-gray-200 max-w-xl mx-auto lg:mx-0 leading-relaxed [text-shadow:_0_1px_12px_rgba(0,0,0,0.7)]">
+            {/* 👇 Updated paragraph: smaller text under 373px */}
+            <p
+              className="
+                mt-4
+                text-sm
+                [@media(min-width:373px)]:mt-5
+                [@media(min-width:373px)]:text-base
+                sm:mt-6
+                sm:text-lg
+                md:text-xl
+                text-gray-200
+                max-w-xl
+                mx-auto
+                lg:mx-0
+                leading-relaxed
+                [text-shadow:_0_1px_12px_rgba(0,0,0,0.7)]
+              "
+            >
               Hi, I&apos;m <span className="text-white font-semibold">Juan Pablo Acosta</span>.
-              Full-Stack Software Engineer with 4+ years building scalable
-              platforms that drive real results —{" "}
-              <span className="text-accent">300%+ sales growth</span>,{" "}
-              5x user scaling &amp; 99.9% uptime.
+              Full-Stack Software Engineer with 4+ years building scalable platforms that drive real results —{" "}
+              <span className="text-accent">300%+ sales growth</span>, 5x user scaling &amp; 99.9% uptime.
             </p>
 
             {/* CTAs */}
