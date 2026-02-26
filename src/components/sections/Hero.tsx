@@ -21,10 +21,9 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Stable mobile layout: Fixed top padding prevents jumping when mobile browser UI collapses. */}
+      {/* Stable mobile layout */}
       <div className="pointer-events-none relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-[100svh] lg:min-h-[100dvh] flex flex-col pt-17 pb-28 justify-top lg:flex-row lg:items-center lg:pt-0 lg:pb-0">
         <div className="w-full">
-          {/* Text Content — sits above globe */}
           <div className="pointer-events-auto text-center lg:text-left relative z-20 lg:max-w-[50%]">
             {/* Tag line */}
             <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-white/10 border border-white/20 mb-4 sm:mb-6 backdrop-blur-sm">
@@ -40,21 +39,29 @@ export function Hero() {
               to the future
             </h1>
 
-            {/* 👇 Updated paragraph: smaller text under 373px */}
+            {/* 👇 Micro-screen safe paragraph (no 5-line wrap under 337px) */}
             <p
               className="
-                mt-4
-                text-sm
+                mt-3
+                text-[13px]
+                leading-snug
+                max-w-[92%]
+                mx-auto
+
+                [@media(min-width:337px)]:mt-4
+                [@media(min-width:337px)]:text-sm
+                [@media(min-width:337px)]:leading-relaxed
+                [@media(min-width:337px)]:max-w-xl
+
                 [@media(min-width:373px)]:mt-5
                 [@media(min-width:373px)]:text-base
+
                 sm:mt-6
                 sm:text-lg
                 md:text-xl
+
                 text-gray-200
-                max-w-xl
-                mx-auto
                 lg:mx-0
-                leading-relaxed
                 [text-shadow:_0_1px_12px_rgba(0,0,0,0.7)]
               "
             >
@@ -97,30 +104,20 @@ export function Hero() {
       </div>
 
       {/* Scroll indicator */}
-      <div
-        className="pointer-events-auto absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 sm:gap-3 z-20 animate-fade-in"
-        style={{ animationDelay: "0.5s", animationFillMode: "both" }}
-      >
-        <span
-          className="text-xs font-medium text-white uppercase tracking-[0.25em]"
-          style={{ textShadow: "0 0 6px #ffffff, 0 0 12px #ffffff" }}
-        >
+      <div className="pointer-events-auto absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 sm:gap-3 z-20 animate-fade-in">
+        <span className="text-xs font-medium text-white uppercase tracking-[0.25em]">
           Scroll
         </span>
         <div className="animate-bounce mt-3">
           <div className="relative flex items-center justify-center">
             <div className="absolute w-10 h-10 rounded-full border border-white/30 animate-ping" />
-            <div
-              className="w-8 h-8 rounded-full border border-white/70 flex items-center justify-center"
-              style={{ boxShadow: "0 0 6px #ffffff, 0 0 12px #ffffff" }}
-            >
+            <div className="w-8 h-8 rounded-full border border-white/70 flex items-center justify-center">
               <ArrowDown className="w-3.5 h-3.5 text-white" />
             </div>
           </div>
         </div>
       </div>
 
-      {/* Bottom gradient fade to white */}
       <div className="absolute bottom-0 left-0 right-0 h-24 sm:h-32 bg-gradient-to-t from-white to-transparent z-10" />
     </section>
   );
