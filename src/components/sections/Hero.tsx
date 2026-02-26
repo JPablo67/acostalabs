@@ -6,7 +6,7 @@ import { GlobeScene } from "@/components/globe/GlobeScene";
 
 export function Hero() {
   return (
-    <section className="relative min-h-[100dvh] bg-dark overflow-clip">
+    <section className="relative min-h-[100svh] lg:min-h-[100dvh] bg-dark overflow-clip">
       {/* Background gradient — using will-change for GPU compositing */}
       <div className="absolute inset-0 will-change-transform">
         <div className="absolute inset-0 bg-gradient-to-b from-dark via-dark-surface/50 to-dark" />
@@ -22,7 +22,7 @@ export function Hero() {
       </div>
 
       {/* Stable mobile layout: Fixed top padding prevents jumping when mobile browser UI collapses. */}
-      <div className="pointer-events-none relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-[100svh] flex flex-col pt-24 pb-32 justify-start lg:justify-center lg:flex-row lg:items-center lg:pt-0 lg:pb-0">
+      <div className="pointer-events-none relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-[100svh] lg:min-h-[100dvh] flex flex-col pt-20 pb-28 justify-center lg:flex-row lg:items-center lg:pt-0 lg:pb-0">
         <div className="w-full">
           {/* Text Content — sits above globe */}
           <div
@@ -88,8 +88,8 @@ export function Hero() {
 
       {/* Scroll indicator */}
       <div
-        className="pointer-events-auto absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-20 animate-fade-in"
-        style={{ animationDelay: "1.5s", animationFillMode: "both" }}
+        className="pointer-events-auto absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 sm:gap-3 z-20 animate-fade-in"
+        style={{ animationDelay: "0.5s", animationFillMode: "both" }}
       >
         <span
           className="text-xs font-medium text-white uppercase tracking-[0.25em]"
