@@ -21,16 +21,16 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Wrapper now uses min-h-dvh and vertical centering to automatically fit varying screen heights natively without overflowing padding */}
-      <div className="pointer-events-none relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-[100dvh] flex flex-col justify-center pt-10 lg:flex-row lg:items-center lg:pt-0 lg:pb-0 ">
-        <div className="w-full mt-10 md:mt-0">
+      {/* Stable mobile layout: Fixed top padding prevents jumping when mobile browser UI collapses. */}
+      <div className="pointer-events-none relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-[100svh] flex flex-col pt-24 pb-20 justify-start lg:justify-center lg:flex-row lg:items-center lg:pt-0 lg:pb-0">
+        <div className="w-full">
           {/* Text Content — sits above globe */}
           <div
             className="pointer-events-auto text-center lg:text-left relative z-20 lg:max-w-[50%]"
           >
             {/* Tag line */}
             <div
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 mb-6 backdrop-blur-sm"
+              className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-white/10 border border-white/20 mb-4 sm:mb-6 backdrop-blur-sm"
             >
               <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
               <span className="text-sm font-semibold text-white tracking-wide">
@@ -45,7 +45,7 @@ export function Hero() {
               to the future
             </h1>
 
-            <p className="mt-6 text-lg sm:text-xl text-gray-200 max-w-xl mx-auto lg:mx-0 leading-relaxed [text-shadow:_0_1px_12px_rgba(0,0,0,0.7)]">
+            <p className="mt-5 sm:mt-6 text-base sm:text-lg md:text-xl text-gray-200 max-w-xl mx-auto lg:mx-0 leading-relaxed [text-shadow:_0_1px_12px_rgba(0,0,0,0.7)]">
               Hi, I&apos;m <span className="text-white font-semibold">Juan Pablo Acosta</span>.
               Full-Stack Software Engineer with 4+ years building scalable
               platforms that drive real results —{" "}
@@ -54,19 +54,19 @@ export function Hero() {
             </p>
 
             {/* CTAs */}
-            <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-              <Button href="#contact" size="lg">
-                <Send className="w-5 h-5" />
+            <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center md:justify-start">
+              <Button href="#contact" size="lg" className="w-full sm:w-auto">
+                <Send className="w-4 h-4 sm:w-5 sm:h-5" />
                 Let&apos;s Talk
               </Button>
-              <Button href="#projects" variant="secondary" size="lg">
-                <FolderOpen className="w-5 h-5" />
+              <Button href="#projects" variant="secondary" size="lg" className="w-full sm:w-auto">
+                <FolderOpen className="w-4 h-4 sm:w-5 sm:h-5" />
                 See My Work
               </Button>
             </div>
 
             {/* Quick stats */}
-            <div className="mt-10 md:mt-12 grid grid-cols-3 gap-4 md:gap-6 max-w-md mx-auto md:mx-0">
+            <div className="mt-8 sm:mt-12 grid grid-cols-3 gap-2 sm:gap-4 md:gap-6 max-w-md mx-auto md:mx-0">
               {[
                 { value: "300%+", label: "Sales Growth" },
                 { value: "99.9%", label: "Uptime" },
@@ -86,9 +86,9 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* Scroll indicator (hidden on small screens to save space and prevent overlap) */}
       <div
-        className="pointer-events-auto absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-20 animate-fade-in"
+        className="hidden md:flex pointer-events-auto absolute bottom-6 left-1/2 -translate-x-1/2 flex-col items-center gap-3 z-20 animate-fade-in"
         style={{ animationDelay: "1.5s", animationFillMode: "both" }}
       >
         <span
