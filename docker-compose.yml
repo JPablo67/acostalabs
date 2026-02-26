@@ -4,7 +4,7 @@ services:
     container_name: acostalabs-web
     restart: unless-stopped
     ports:
-      - "127.0.0.1:3001:3001"
+      - "3001:3001"
     environment:
       - NODE_ENV=production
       - NEXT_TELEMETRY_DISABLED=1
