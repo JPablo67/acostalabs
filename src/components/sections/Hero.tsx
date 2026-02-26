@@ -21,7 +21,7 @@ export function Hero() {
         </div>
       </div>
 
-      <div className="pointer-events-none relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 lg:min-h-[100dvh] flex items-start pt-16 sm:pt-28 lg:items-center lg:pt-0">
+      <div className="pointer-events-none relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 lg:min-h-[100dvh] flex items-start pt-16 pb-40 sm:pt-28 sm:pb-48 lg:items-center lg:pt-0 lg:pb-0">
         <div className="w-full">
           {/* Text Content — sits above globe */}
           <div
