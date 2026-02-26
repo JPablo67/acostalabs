@@ -1,10 +1,10 @@
 -- Create custom roles for least-privilege security
 DO $$ 
 BEGIN
-    IF NOT EXISTS (SELECT FROM pg_catalog.pg_roles WHERE rolename = 'acostalabs_app') THEN
+    IF NOT EXISTS (SELECT FROM pg_catalog.pg_roles WHERE rolname = 'acostalabs_app') THEN
         CREATE ROLE acostalabs_app WITH LOGIN PASSWORD 'app_secure_pw_123';
     END IF;
-    IF NOT EXISTS (SELECT FROM pg_catalog.pg_roles WHERE rolename = 'acostalabs_admin') THEN
+    IF NOT EXISTS (SELECT FROM pg_catalog.pg_roles WHERE rolname = 'acostalabs_admin') THEN
         CREATE ROLE acostalabs_admin WITH LOGIN PASSWORD 'admin_secure_pw_456';
     END IF;
 END $$;
