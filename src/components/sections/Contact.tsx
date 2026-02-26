@@ -22,7 +22,6 @@ interface ContactFormData {
   name: string;
   email: string;
   subject: string;
-  budget: string;
   message: string;
 }
 
@@ -252,25 +251,6 @@ export function Contact() {
                         {errors.subject.message}
                       </p>
                     )}
-                  </div>
-
-                  {/* Budget Range */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-2">
-                      Budget Range{" "}
-                      <span className="text-gray-500">(Optional)</span>
-                    </label>
-                    <select
-                      {...register("budget")}
-                      className="w-full px-4 py-3 rounded-xl bg-dark-surface border border-gray-700 text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
-                    >
-                      <option value="">Select budget range</option>
-                      <option value="1k-5k">$1,000 - $5,000</option>
-                      <option value="5k-15k">$5,000 - $15,000</option>
-                      <option value="15k-50k">$15,000 - $50,000</option>
-                      <option value="50k+">$50,000+</option>
-                      <option value="discuss">Let&apos;s discuss</option>
-                    </select>
                   </div>
 
                   {/* Message */}

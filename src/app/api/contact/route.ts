@@ -11,7 +11,7 @@ const resend = new Resend(process.env.RESEND_API_KEY || "re_dummy_fallback");
 export async function POST(req: NextRequest) {
     try {
         const data = await req.json();
-        const { name, email, subject, budget, message } = data;
+        const { name, email, subject, message } = data;
 
         // 1. Basic Validation
         if (!name || !email || !subject || !message) {
@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
       VALUES (?, ?, ?, ?, ?, ?)
     `);
 
-        stmt.run(name, email, subject, budget || null, message, ip);
+        stmt.run(name, email, subject, null, message, ip);
 
         // 3. Send Emails via Resend (only if API key is present)
         if (process.env.RESEND_API_KEY) {
@@ -41,7 +41,7 @@ export async function POST(req: NextRequest) {
                 to: "jp@acostalabs.com", // This forwards to your personal email via Cloudflare
                 replyTo: email, // If you hit reply, it goes to the user
                 subject: `New Lead: ${subject} from ${name}`,
-                react: ContactNotification({ name, email, subject, budget, message }),
+                react: ContactNotification({ name, email, subject, message }),
             }).catch(console.error);
 
             // Email 2: Auto-reply to the User

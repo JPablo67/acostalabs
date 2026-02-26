@@ -14,7 +14,6 @@ interface ContactNotificationProps {
     name: string;
     email: string;
     subject: string;
-    budget?: string;
     message: string;
 }
 
@@ -22,7 +21,6 @@ export default function ContactNotification({
     name = "John Doe",
     email = "john@example.com",
     subject = "Freelance Project",
-    budget = "1k-5k",
     message = "Hello, I need a website designed.",
 }: ContactNotificationProps) {
     return (
@@ -40,9 +38,6 @@ export default function ContactNotification({
                     </Text>
                     <Text style={text}>
                         <strong>Subject:</strong> {subject}
-                    </Text>
-                    <Text style={text}>
-                        <strong>Budget:</strong> {budget || "Not specified"}
                     </Text>
 
                     <Section style={messageSection}>
