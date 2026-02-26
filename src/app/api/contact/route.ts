@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
-import db from "@/lib/db";
+import pool from "@/lib/db";
 import ContactNotification from "@/components/emails/ContactNotification";
 import AutoReply from "@/components/emails/AutoReply";
 
@@ -24,13 +24,12 @@ export async function POST(req: NextRequest) {
         // Capture IP for basic tracking/rate-limiting
         const ip = req.headers.get("x-forwarded-for") || "unknown";
 
-        // 2. Save to SQLite
-        const stmt = db.prepare(`
-      INSERT INTO contacts (name, email, subject, budget, message, ip)
-      VALUES (?, ?, ?, ?, ?, ?)
-    `);
-
-        stmt.run(name, email, subject, null, message, ip);
+        // 2. Save to PostgreSQL
+        await pool.query(
+            `INSERT INTO contacts (name, email, subject, message, ip)
+             VALUES ($1, $2, $3, $4, $5)`,
+            [name, email, subject, message, ip]
+        );
 
         // 3. Send Emails via Resend (only if API key is present)
         if (process.env.RESEND_API_KEY) {

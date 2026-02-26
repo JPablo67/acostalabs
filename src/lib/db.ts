@@ -1,34 +1,15 @@
-import Database from 'better-sqlite3';
-import path from 'path';
-import fs from 'fs';
+import { Pool } from "pg";
 
-// Database file path inside the Docker container (or local dev)
-const DATA_DIR = path.join(process.cwd(), 'data');
-const DB_PATH = path.join(DATA_DIR, 'contacts.db');
+// Next.js will use the 'acostalabs_app' user which only has INSERT privileges
+// This prevents any read/delete operations from the web app
+const pool = new Pool({
+  host: process.env.DB_HOST || "postgres", // Docker service name or localhost
+  port: parseInt(process.env.DB_PORT || "5432"),
+  database: process.env.POSTGRES_DB || "acostalabs",
+  user: "acostalabs_app",
+  password: "app_secure_pw_123",
+  max: 10, // Max 10 connections in the pool
+  idleTimeoutMillis: 30000,
+});
 
-// Ensure data directory exists
-if (!fs.existsSync(DATA_DIR)) {
-    fs.mkdirSync(DATA_DIR, { recursive: true });
-}
-
-// Initialize database
-const db = new Database(DB_PATH, { verbose: console.log });
-
-// Enable WAL mode for better concurrency performance
-db.pragma('journal_mode = WAL');
-
-// Ensure the contacts table exists
-db.exec(`
-  CREATE TABLE IF NOT EXISTS contacts (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT NOT NULL,
-    email TEXT NOT NULL,
-    subject TEXT NOT NULL,
-    budget TEXT,
-    message TEXT NOT NULL,
-    ip TEXT,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-  )
-`);
-
-export default db;
+export default pool;

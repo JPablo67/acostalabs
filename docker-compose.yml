@@ -23,22 +23,43 @@ services:
           memory: 512M
           cpus: "1.0"
 
-  db-ui:
-    image: coleifer/sqlite-web
-    container_name: acostalabs-db-ui
+  postgres:
+    image: postgres:15-alpine
+    container_name: acostalabs-db
     restart: unless-stopped
     ports:
-      - "127.0.0.1:8080:8080"
-    volumes:
-      - sqlite_data:/data
+      - "127.0.0.1:5432:5432"
     environment:
-      - SQLITE_WEB_PASSWORD=${DB_UI_PASSWORD:-acostalabs_admin}
-    command: sqlite_web -H 0.0.0.0 -x --password ${DB_UI_PASSWORD:-acostalabs_admin} /data/contacts.db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: acostalabs
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+      - ./src/db/init.sql:/docker-entrypoint-initdb.d/init.sql
     deploy:
       resources:
         limits:
-          memory: 128M
-          cpus: "0.5"
+          memory: 512M
+          cpus: "1.0"
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: acostalabs-pgadmin
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8080:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: "1.0"
 
 volumes:
-  sqlite_data:
+  pg_data:
+  pgadmin_data:
