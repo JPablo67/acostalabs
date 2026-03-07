@@ -3,44 +3,16 @@
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { TECH_STACK } from "@/lib/constants";
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
 
-/**
- * Single observer per CATEGORY card instead of per skill bar.
- * The parent card ref triggers all child bars at once, cutting
- * ~26 IntersectionObserver instances down to 5.
- */
-function SkillBar({
-  name,
-  level,
-  delay,
-  isInView,
-}: {
-  name: string;
-  level: number;
-  delay: number;
-  isInView: boolean;
-}) {
-  return (
-    <div className="group">
-      <div className="flex items-center justify-between mb-2">
-        <span className="text-sm font-medium text-text group-hover:text-primary transition-colors">
-          {name}
-        </span>
-        <span className="text-xs text-text-muted font-mono">{level}%</span>
-      </div>
-      <div className="h-2 bg-surface rounded-full overflow-hidden border border-border">
-        <motion.div
-          initial={{ width: 0 }}
-          animate={isInView ? { width: `${level}%` } : { width: 0 }}
-          transition={{ duration: 1, delay, ease: "easeOut" }}
-          className="h-full rounded-full bg-gradient-to-r from-primary to-accent"
-        />
-      </div>
-    </div>
-  );
-}
+const CATEGORY_ICONS: Record<string, string> = {
+  Frontend: "🎨",
+  Backend: "⚙️",
+  "AI & ML": "🤖",
+  "AI-Augmented Dev": "🚀",
+  "Cloud & DevOps": "☁️",
+  Databases: "🗄️",
+  Architecture: "🏗️",
+};
 
 function CategoryCard({
   category,
@@ -48,31 +20,25 @@ function CategoryCard({
   catIndex,
 }: {
   category: string;
-  skills: readonly { readonly name: string; readonly level: number }[];
+  skills: readonly { readonly name: string }[];
   catIndex: number;
 }) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(cardRef, { once: true, margin: "-50px" });
-
   return (
     <AnimatedSection delay={catIndex * 0.1} className="bg-white rounded-2xl border border-border p-6">
-      <div ref={cardRef}>
-        <h3 className="text-lg font-bold text-text mb-6 flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-gradient-to-r from-primary to-accent" />
-          {category}
-        </h3>
+      <h3 className="text-lg font-bold text-text mb-5 flex items-center gap-2">
+        <span className="text-xl">{CATEGORY_ICONS[category] ?? "🔧"}</span>
+        {category}
+      </h3>
 
-        <div className="space-y-4">
-          {skills.map((skill, skillIndex) => (
-            <SkillBar
-              key={skill.name}
-              name={skill.name}
-              level={skill.level}
-              delay={catIndex * 0.1 + skillIndex * 0.05}
-              isInView={isInView}
-            />
-          ))}
-        </div>
+      <div className="flex flex-wrap gap-2">
+        {skills.map((skill) => (
+          <span
+            key={skill.name}
+            className="px-3 py-1.5 text-sm font-medium rounded-full bg-surface border border-border text-text-muted hover:border-primary hover:text-primary transition-colors cursor-default"
+          >
+            {skill.name}
+          </span>
+        ))}
       </div>
     </AnimatedSection>
   );

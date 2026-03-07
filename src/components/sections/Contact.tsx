@@ -158,10 +158,12 @@ export function Contact() {
                   Prefer a video call? Book a free 30-minute consultation.
                 </p>
                 <Button
-                  href="https://calendly.com"
+                  href="https://calendly.com/acostapablose"
                   variant="secondary"
                   size="sm"
                   className="w-full"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   <Calendar className="w-4 h-4" />
                   Book a Meeting

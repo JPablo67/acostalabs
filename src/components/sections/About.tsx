@@ -79,28 +79,25 @@ export function About() {
             <p className="text-lg sm:text-xl leading-relaxed text-text-secondary">
               I&apos;m a{" "}
               <span className="text-text font-semibold">
-                Full-Stack Software Engineer
+                Software Engineer
               </span>{" "}
-              with over 4 years of experience building scalable, high-impact
-              platforms for international clients. I specialize in turning
-              complex business challenges into elegant technical solutions.
+              with 5+ years of experience delivering end-to-end digital
+              products — from architecture and development to deployment and
+              stakeholder delivery — for international clients across
+              e-commerce, SaaS, and enterprise domains.
             </p>
 
             <p className="mt-4 text-lg leading-relaxed text-text-secondary">
-              From driving{" "}
+              Drove{" "}
               <span className="text-primary font-semibold">
-                300%+ sales growth &amp; 5x user scaling
+                300% revenue growth
               </span>{" "}
-              through strategic UX optimization and system re-architecture, to
-              maintaining{" "}
-              <span className="text-primary font-semibold">99.9% uptime</span>{" "}
-              with Grafana &amp; Prometheus and achieving{" "}
-              <span className="text-primary font-semibold">
-                95+ Google Lighthouse scores
-              </span>{" "}
-              across Core Web Vitals — I bring a results-first approach to every
-              project. I&apos;ve also saved teams 40+ hrs/month by automating
-              reporting pipelines and inventory sync workflows.
+              through platform re-architecture, AI integration, and performance
+              engineering. I combine deep technical expertise (Java, Python,
+              Node.js, React, cloud-native infrastructure) with hands-on{" "}
+              <span className="text-primary font-semibold">AI-augmented workflows</span>{" "}
+              (LLMs, RAG pipelines, agentic tooling) and cross-functional
+              leadership to ship high-impact products fast.
             </p>
 
             <p className="mt-4 text-lg leading-relaxed text-text-secondary">

@@ -9,6 +9,8 @@ interface ButtonProps {
   onClick?: () => void;
   type?: "button" | "submit";
   disabled?: boolean;
+  target?: string;
+  rel?: string;
 }
 
 const variants = {
@@ -42,7 +44,7 @@ export function Button({
 
   if (href) {
     return (
-      <a href={href} className={baseClasses}>
+      <a href={href} className={baseClasses} target={target} rel={rel}>
         {children}
       </a>
     );

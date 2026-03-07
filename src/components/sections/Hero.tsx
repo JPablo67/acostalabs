@@ -66,8 +66,8 @@ export function Hero() {
               "
             >
               Hi, I&apos;m <span className="text-white font-semibold">Juan Pablo Acosta</span>.
-              Full-Stack Software Engineer with 4+ years building scalable platforms that drive real results —{" "}
-              <span className="text-accent">300%+ sales growth</span>, 5x user scaling &amp; 99.9% uptime.
+              Software Engineer with 5+ years delivering end-to-end digital products — AI integration, distributed architectures &amp;{" "}
+              <span className="text-accent">300%+ revenue growth</span>.
             </p>
 
             {/* CTAs */}
@@ -96,7 +96,7 @@ export function Hero() {
               {[
                 { value: "300%+", label: "Sales Growth" },
                 { value: "99.9%", label: "Uptime" },
-                { value: "Top 1%", label: "Nationally" },
+                { value: "5x", label: "User Scaling" },
               ].map((stat) => (
                 <div key={stat.label} className="text-center md:text-left">
                   <div className="text-xl sm:text-2xl md:text-3xl font-bold text-white">
