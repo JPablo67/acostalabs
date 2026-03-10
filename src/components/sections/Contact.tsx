@@ -162,7 +162,7 @@ export function Contact() {
                   variant="secondary"
                   size="sm"
                   className="w-full"
-                  target="_blank"
+
                   rel="noopener noreferrer"
                 >
                   <Calendar className="w-4 h-4" />
