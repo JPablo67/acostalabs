@@ -39,6 +39,8 @@ export function Button({
   onClick,
   type = "button",
   disabled = false,
+  target,
+  rel,
 }: ButtonProps) {
   const baseClasses = `inline-flex items-center justify-center gap-2 font-semibold rounded-xl transition-all duration-300 cursor-pointer ${variants[variant]} ${sizes[size]} ${className} ${disabled ? "opacity-50 cursor-not-allowed" : ""}`;
 
