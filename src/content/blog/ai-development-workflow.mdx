@@ -1,24 +1,24 @@
 ---
-title: "A Production-Grade AI Development Workflow: Claude + GitHub Copilot + RAG for Shipping Faster"
+title: "How I Ship Faster Without Breaking Things: My AI-Augmented Engineering Workflow"
 date: "2026-02-25"
-excerpt: "A pragmatic, end-to-end workflow for using Claude, GitHub Copilot, and retrieval-augmented generation to design better systems, ship features faster, and keep real production context in the loop."
-tags: ["AI", "Workflow", "Full-Stack"]
+excerpt: "How I combine Claude, GitHub Copilot, and a RAG pipeline to ship features faster, reduce production incidents, and keep architectural decisions grounded in reality — and what it means for the teams I work with."
+tags: ["AI", "Workflow", "Full-Stack", "Engineering Leadership", "Software Architecture", "Contractor"]
 readTime: "10 min"
 published: true
 ---
 
-## Why Most "AI Dev Workflows" Fail in Production
+## Why Most AI-Augmented Teams Still Ship Slowly
 
-Founders and engineers don't fail at shipping because they lack ideas. They fail because execution collapses under:
+Engineering teams adopting AI tools often expect an immediate speed multiplier. What they get instead is inconsistent output, hallucinated APIs, and fragile glue code that slows the team down two weeks after deployment.
 
-- unclear architecture,
-- inconsistent code quality,
-- stale documentation,
-- and slow iteration loops between product, backend, frontend, and infra.
+The problem isn't the tools — it's the absence of structure around them. Execution collapses when there's:
 
-Throwing AI at this without structure usually makes things worse: hallucinated APIs, inconsistent patterns, and fragile glue code.
+- no clear architectural ownership,
+- AI output that bypasses code review or testing,
+- stale documentation that means every AI session starts from scratch,
+- and no feedback loop between what ships and what breaks.
 
-The workflow below is how I use Claude, GitHub Copilot, and a custom RAG pipeline to reduce cognitive load without surrendering architectural control. This is not about "vibe coding." This is about shipping real features to real users with fewer regressions.
+The workflow below is how I solve this. I use Claude, GitHub Copilot, and a custom RAG pipeline to compress the feedback loop between design and delivery — without sacrificing architectural control or production reliability. This is what I bring to engineering teams and client projects.
 
 ---
 
@@ -232,26 +232,27 @@ results = ask_project_memory("How does token refresh work?")
 
 ---
 
-## Practical Tips for Founders and Engineering Leads
+## Practical Tips for Engineering Leads and CTOs
 
-- **Gate AI output with CI:** migrations, tests, lint, security scans
-- **Record decisions:** feed ADRs into RAG or you'll repeat mistakes
-- **Separate roles:** design with Claude, type with Copilot
-- **Measure outcomes:** cycle time, regression rate, incident count
-- **Budget for infra:** RAG is an engineering system, not a toy
+- **Gate AI output with CI:** migrations, tests, lint, security scans — if your pipeline doesn't catch bad AI output, it will reach production
+- **Record decisions:** feed ADRs into RAG or you'll repeat the same architectural mistakes every 6 months
+- **Separate roles:** design with Claude, write with Copilot — mixing them creates mush
+- **Measure outcomes:** track cycle time, regression rate, and incident count before and after adopting AI tooling
+- **Budget for RAG infra:** it's an engineering system, not a plugin — treat it that way
 
 ---
 
-## Closing: Why This Matters for Real Businesses
+## Why This Matters When You're Hiring or Contracting
 
-AI doesn't replace senior engineers. It compresses the feedback loop between thinking and shipping.
+AI doesn't replace senior engineers. It separates the ones who use it deliberately from the ones who use it carelessly.
 
-My value to teams isn't "I use AI."
-It's that I design systems where:
+The engineers who move fast without breaking things aren't faster because of the tools. They're faster because they've built a system around the tools:
 
-- architecture decisions are **deliberate**,
-- AI output is **constrained by reality**,
-- documentation **stays alive**,
-- and features move from idea → production **without chaos**.
+- **Architecture decisions are deliberate** — not delegated to a model
+- **AI output is constrained by real project context** — RAG, CI, and code review do the heavy lifting
+- **Documentation stays alive** — because every new session feeds from it
+- **Features ship without chaos** — because the workflow is repeatable, not improvised
 
-End-to-end delivery plus pragmatic AI adoption is how you ship faster without breaking your product or your team.
+If you're building a team or scoping a contract engagement and want an engineer who brings this kind of discipline — not just speed — I'd like to hear about what you're working on.
+
+**[Let's talk about your project →](/#contact)**
