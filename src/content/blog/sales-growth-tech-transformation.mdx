@@ -46,12 +46,7 @@ We ripped out the legacy frontend and migrated the entire presentation layer to 
 ### The Impact
 The results were immediate and staggering. By pleasing the Google crawler, organic traffic spiked. By pleasing the user, bounce rates plummeted.
 
-| Metric | Legacy System | New Next.js Stack | Improvement |
-|--------|---------------|-------------------|-------------|
-| **LCP (Largest Contentful Paint)** | 8.2s | 1.4s | ⚡ 82% Faster |
-| **FID (First Input Delay)** | 320ms | 12ms | ⚡ 96% Faster |
-| **CLS (Cumulative Layout Shift)**| 0.42 | 0.02 | ⚡ 95% Better |
-| **Lighthouse Performance** | 34/100 | 98/100 | 📈 +64 Points |
+![Performance Transformation: Legacy System vs Next.js Stack — LCP 82% faster, FID 96% faster, CLS 95% better, Lighthouse +64 points](/images/blog/performance_metrics_comparison.png)
 
 ![Next.js Architecture Performance Improvements](/images/blog/Blog1_2.png)
 
@@ -89,7 +84,7 @@ By implementing strict **CI/CD pipelines via GitHub Actions**, we achieved true 
 With a rock-solid, lightning-fast foundation in place, we introduced AI to personalize the shopping experience at scale.
 
 1. **Semantic Search & Recommendations:** We integrated the **OpenAI API** to generate text embeddings for the entire product catalog, storing them in PostgreSQL using the `pgvector` extension. This allowed customers to search using natural language (e.g., *"warm jackets for hiking in the rain"*) rather than exact keyword matches, drastically improving search conversion rates.
-2. **Automated Customer Support:** We deployed an intelligent, context-aware chatbot trained on the company's return policies and product specs, instantly resolving over 70% of tier-1 support tickets without human intervention.
+2. **Automated Customer Support:** We deployed an intelligent, context-aware chatbot trained on the company's return policies and product specs, instantly resolving over 70% of tier-1 support tickets without human intls
 
 ![AI PostgreSQL Vector Search Integration](/images/blog/Blog1_3.png)
 
