@@ -19,14 +19,7 @@ This post breaks it all down: what changed, why it matters compared to older Jav
 
 ## Java 26 vs. Previous Versions: The Evolution at a Glance
 
-| Feature Area | Java 8–11 (Legacy) | Java 17–21 (Modern) | Java 26 (Current) |
-|---|---|---|---|
-| **Startup Speed** | Slow cold starts | Improved JIT | AOT Object Caching (any GC) |
-| **Concurrency** | Manual threads, complex | Virtual threads (preview) | Structured Concurrency (preview 6) |
-| **HTTP Support** | HTTP/1.1 only | HTTP/2 via Client API | HTTP/3 natively supported |
-| **Security** | Basic TLS | Enhanced crypto | PEM API + post-quantum signing |
-| **AI Readiness** | Minimal | Basic record types | Vector API + pattern matching for AI |
-| **Applet API** | Present | Deprecated | **Removed** |
+![Java version comparison: Java 8-11 Legacy vs Java 17-21 Modern vs Java 26 Current](/images/blog/java26_version_comparison.png)
 
 The jump from Java 8 or 11 (still running in many legacy systems) to Java 26 is not just a version number—it's a **full platform modernization**. Businesses still on old Java versions are carrying technical debt that slows down feature delivery, increases security risk, and makes hiring harder.
 
@@ -180,25 +173,7 @@ Think of it like this: if your business already runs on Spring Boot (which milli
 
 ### How Java 26 Supercharges Spring AI
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    SPRING AI + JAVA 26                      │
-├─────────────────────────────────────────────────────────────┤
-│  Your Spring Boot App                                       │
-│       │                                                     │
-│       ├── Spring AI Advisor → OpenAI / Gemini / Claude      │
-│       │       │                                             │
-│       │       └── Java 26 HTTP/3 (JEP 517) ─► AI APIs      │
-│       │                                                     │
-│       ├── RAG Pipeline → Vector Store                       │
-│       │       │                                             │
-│       │       └── Java 26 Vector API (JEP 529) ─► FAST     │
-│       │                                                     │
-│       └── Concurrent AI Calls                              │
-│               │                                             │
-│               └── Java 26 Structured Concurrency (JEP 525) │
-└─────────────────────────────────────────────────────────────┘
-```
+![Spring AI + Java 26 architecture diagram showing HTTP/3, Vector API, and Structured Concurrency integration](/images/blog/java26_spring_ai_architecture.png)
 
 **Real example—building a smart customer support bot with Spring AI on Java 26:**
 
@@ -235,24 +210,7 @@ This is production-ready AI—not a toy demo—and it runs on your existing Java
 
 If you're a business owner evaluating developers or agencies, here's your 2026 Java hiring checklist:
 
-### ✅ Must-Know for Any Java Developer You Hire
-
-| Skill | Why It Matters |
-|---|---|
-| **Java 21–26 features** | Virtual threads, records, pattern matching, sealed classes |
-| **Spring Boot 3.x** | Current enterprise standard; anything older is a liability |
-| **Spring AI** | AI integration without rewriting your stack |
-| **Structured Concurrency** | Reliable parallel processing—critical for modern apps |
-| **GraalVM / Native Image** | Pairs with AOT caching for ultra-fast startup |
-| **Container-native Java** | Docker + Kubernetes deployment patterns |
-| **Security best practices** | PEM handling, post-quantum awareness, HTTPS/3 |
-
-### 🚩 Red Flags to Watch For
-
-- A developer still defaulting to Java 8 or 11 without a documented migration roadmap
-- No knowledge of Spring Boot 3.x or Spring AI
-- No mention of Virtual Threads or Structured Concurrency for concurrent workloads
-- Treats AI integration as "a Python thing only"—Java is now a first-class AI platform
+![Java developer hiring checklist 2026: must-know skills and red flags](/images/blog/java26_hiring_checklist.png)
 
 ---
 
