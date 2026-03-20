@@ -58,24 +58,8 @@ Chatbots can resolve 70–80% of queries if you:
 - Escalate seamlessly to human agents when confidence is low
 
 **Architecture:**
-```
-┌─────────────┐     ┌──────────────┐     ┌─────────────┐
-│  Next.js UI │────▶│  API Routes  │────▶│  OpenAI API │
-└─────────────┘     └──────────────┘     └─────────────┘
-                          │
-                   ┌──────▼──────┐
-                   │  Vector DB  │
-                   │  (pgvector) │
-                   └─────────────┘
-                          │
-                   ┌──────▼──────┐
-                   │ Guardrails  │
-                   └─────────────┘
-                          │
-                   ┌──────▼──────┐
-                   │ Escalation  │
-                   └─────────────┘
-```
+
+![Production-Grade RAG architecture: Next.js UI → API Routes → OpenAI API, with Vector DB, Guardrails, and Human Escalation layers](/images/blog/rag_chatbot_architecture.png)
 
 **Implementation Tip:**
 Use confidence scores and explicit fallback triggers. If the LLM isn’t sure, escalate—don’t let it guess.

@@ -24,12 +24,7 @@ The workflow below is how I solve this. I use Claude, GitHub Copilot, and a cust
 
 ## The Stack (Opinionated and Boring on Purpose)
 
-| Tool | Role | Where It Fits |
-|------|------|---------------|
-| **Claude** | Architecture, refactors, reviews, threat modeling | Planning, Review |
-| **GitHub Copilot** | Line-level implementation, tests, boilerplate | Coding |
-| **Custom RAG** | Project memory (ADRs, schemas, API contracts) | All stages |
-| **CI/CD** | Guardrails (lint, tests, migrations, security) | Delivery |
+![AI engineering tool stack: Claude, GitHub Copilot, Custom RAG, and CI/CD with their roles](/images/blog/ai_tool_stack_comparison.png)
 
 **Rule: LLMs propose, CI enforces.**
 If your pipeline doesn't fail bad AI output, your workflow is broken.
@@ -38,36 +33,7 @@ If your pipeline doesn't fail bad AI output, your workflow is broken.
 
 ## Architecture: How the Pieces Actually Work Together
 
-Text-based workflow diagram (this is what runs in my head every day):
-
-```
-[Product Requirements]
-          |
-          v
-     (Claude: design)
-          |
-          v
-[ADR + API Contracts + DB Schema]
-          |
-          v
-   (RAG Index Updated)
-          |
-          v
-[Implementation]
-   |           |
-(Copilot)   (Tests)
-   |           |
-   +-----+-----+
-         |
-         v
-    (CI/CD: lint, tests, security)
-         |
-         v
-     (Claude: review)
-         |
-         v
-      Production
-```
+![AI-augmented engineering workflow: from Product Requirements through Claude, RAG, Copilot, CI/CD, to Production](/images/blog/ai_workflow_architecture.png)
 
 **Key insight:**
 RAG is the memory layer that keeps Claude honest. Without it, every design conversation starts from amnesia.
