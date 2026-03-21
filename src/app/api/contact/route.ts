@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
         const ip = req.headers.get("x-forwarded-for") || "unknown";
 
         // Check Rate Limit (Max 3 per hour per IP)
-        const { success } = checkRateLimit(ip);
+        const { success } = checkRateLimit(ip, "contact");
         if (!success) {
             return NextResponse.json(
                 { error: "Too many requests. Please wait an hour before sending another message." },

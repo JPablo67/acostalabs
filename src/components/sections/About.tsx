@@ -1,13 +1,62 @@
 "use client";
 
+import { useState } from "react";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { METRICS, SITE } from "@/lib/constants";
-import { Github, Linkedin, Mail, MapPin, Download } from "lucide-react";
+import { Github, Linkedin, Mail, MapPin, Download, Send, CheckCircle2, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import Image from "next/image";
 
+type ResumeState = "idle" | "input" | "submitting" | "success" | "error";
+
 export function About() {
+  const [resumeState, setResumeState] = useState<ResumeState>("idle");
+  const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [serverError, setServerError] = useState("");
+
+  const handleDownloadClick = () => {
+    setResumeState("input");
+    setEmail("");
+    setEmailError("");
+    setServerError("");
+  };
+
+  const handleResumeSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // Client-side validation
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setEmailError("Please enter a valid email address.");
+      return;
+    }
+
+    setEmailError("");
+    setServerError("");
+    setResumeState("submitting");
+
+    try {
+      const res = await fetch("/api/resume", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        setServerError(data.error || "Something went wrong. Please try again.");
+        setResumeState("error");
+        return;
+      }
+
+      setResumeState("success");
+    } catch {
+      setServerError("Network error. Please try again.");
+      setResumeState("error");
+    }
+  };
+
   return (
     <section id="about" className="section-padding bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -22,7 +71,7 @@ export function About() {
           {/* Left: Photo + Socials */}
           <AnimatedSection className="lg:col-span-2 flex flex-col items-center">
             <div className="relative">
-              {/* Photo placeholder — gradient avatar */}
+              {/* Photo */}
               <div className="w-56 h-56 sm:w-64 sm:h-64 rounded-3xl border-2 border-border overflow-hidden">
                 <Image
                   src="/jp.jpg"
@@ -34,7 +83,7 @@ export function About() {
                 />
               </div>
 
-              {/* Decorative dot */}
+              {/* Decorative dots */}
               <div className="absolute -top-3 -right-3 w-6 h-6 rounded-full bg-accent" />
               <div className="absolute -bottom-3 -left-3 w-4 h-4 rounded-full bg-primary" />
             </div>
@@ -103,13 +152,13 @@ export function About() {
             <p className="mt-4 text-lg leading-relaxed text-text-secondary">
               Based in Colombia, working with clients worldwide.{" "}
               <span className="text-text font-medium">
-                Bilingual: English (C2) & Spanish (Native).
+                Bilingual: English (C2) &amp; Spanish (Native).
               </span>
             </p>
 
             {/* Metrics Grid */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-10">
-              {METRICS.map((metric, i) => (
+              {METRICS.map((metric) => (
                 <div
                   key={metric.label}
                   className="text-center p-4 rounded-2xl bg-surface border border-border"
@@ -124,12 +173,74 @@ export function About() {
               ))}
             </div>
 
-            {/* Download Resume */}
+            {/* Resume Download — Email Gate */}
             <div className="mt-8">
-              <Button href="/resume.pdf" variant="outline" size="sm">
-                <Download className="w-4 h-4" />
-                Download Resume
-              </Button>
+              {resumeState === "idle" && (
+                <Button
+                  onClick={handleDownloadClick}
+                  variant="outline"
+                  size="sm"
+                >
+                  <Download className="w-4 h-4" />
+                  Download Resume
+                </Button>
+              )}
+
+              {(resumeState === "input" || resumeState === "submitting" || resumeState === "error") && (
+                <form
+                  onSubmit={handleResumeSubmit}
+                  className="flex flex-col sm:flex-row gap-2 items-start sm:items-center"
+                >
+                  <div className="flex-1 w-full sm:w-auto">
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => {
+                        setEmail(e.target.value);
+                        if (emailError) setEmailError("");
+                        if (serverError) setServerError("");
+                      }}
+                      placeholder="your@email.com"
+                      disabled={resumeState === "submitting"}
+                      autoFocus
+                      className="w-full px-4 py-2.5 rounded-xl border border-border bg-surface text-text placeholder:text-text-muted text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all disabled:opacity-50"
+                    />
+                    {emailError && (
+                      <p className="text-red-500 text-xs mt-1">{emailError}</p>
+                    )}
+                    {serverError && (
+                      <p className="text-red-500 text-xs mt-1">{serverError}</p>
+                    )}
+                  </div>
+                  <Button
+                    type="submit"
+                    size="sm"
+                    disabled={resumeState === "submitting"}
+                    className="whitespace-nowrap"
+                  >
+                    {resumeState === "submitting" ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-4 h-4" />
+                        Send Resume
+                      </>
+                    )}
+                  </Button>
+                </form>
+              )}
+
+              {resumeState === "success" && (
+                <div className="flex items-center gap-2 text-sm text-green-600">
+                  <CheckCircle2 className="w-5 h-5" />
+                  <span>
+                    <strong>Got it!</strong> I'll review your request and manually send the resume to {email} shortly.
+                  </span>
+                </div>
+              )}
             </div>
           </AnimatedSection>
         </div>

@@ -13,13 +13,14 @@ const rateLimitMap = new Map<string, RateLimitRecord>();
 const WINDOW_MS = 60 * 60 * 1000; // 1 hour in milliseconds
 const MAX_REQUESTS = 3;
 
-export function checkRateLimit(ip: string): { success: boolean } {
+export function checkRateLimit(ip: string, namespace = "default"): { success: boolean } {
+    const key = `${namespace}:${ip}`;
     const now = Date.now();
-    const record = rateLimitMap.get(ip);
+    const record = rateLimitMap.get(key);
 
     // 1. IP not seen before -> Allow and start tracking
     if (!record) {
-        rateLimitMap.set(ip, { count: 1, resetTime: now + WINDOW_MS });
+        rateLimitMap.set(key, { count: 1, resetTime: now + WINDOW_MS });
         return { success: true };
     }
 
